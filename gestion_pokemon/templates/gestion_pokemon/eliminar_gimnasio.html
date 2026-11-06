@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Eliminar Gimnasio</title>
+    <link rel="stylesheet" href="{% static 'css/eliminar_pokemon.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container-delete">
+        <div class="card-delete">
+            <h2>⚠️ ¿Eliminar Gimnasio? ⚠️</h2>
+            <p>¿Estás seguro de que deseas eliminar el gimnasio de <strong>{{ gimnasio.lider_del_gym }}</strong> (Tipo: {{ gimnasio.naturaleza_elemento }})?</p>
+            <p class="warning-text">Esta acción no se puede deshacer.</p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="delete-actions">
+                    <button type="submit" class="btn btn-delete">Sí, Eliminar</button>
+                    <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn btn-back">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

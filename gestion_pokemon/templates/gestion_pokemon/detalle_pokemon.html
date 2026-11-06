@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pokemon.nombre }} - Detalle</title>
+    <!-- Enlace al archivo CSS independiente -->
+    <link rel="stylesheet" href="{% static 'css/detalle_pokemon.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="container-detail">
+        <div class="pokemon-image-box">
+            {% if pokemon.imagen %}
+                <img src="{{ pokemon.imagen.url }}" alt="{{ pokemon.nombre }}">
+            {% else %}
+                <img src="{% static 'images/default-pokemon.png' %}" alt="Sin imagen">
+            {% endif %}
+        </div>
+
+        <div class="header-detail">
+            <h2>{{ pokemon.nombre }}</h2>
+            <span class="pokemon-badge">
+                {{ pokemon.naturaleza_elemento }}
+            </span>
+        </div>
+
+        <div class="pokemon-info-card">
+            <p><strong>Descripción:</strong> {{ pokemon.descripcion }}</p>
+            <p><strong>Peso:</strong> {{ pokemon.peso }} kg</p>
+            <p><strong>Habilidades:</strong> {{ pokemon.habilidades }}</p>
+        </div>
+
+        <div class="detail-buttons">
+            <a href="{% url 'gestion_pokemon:editar_pokemon' pokemon.id %}" class="btn btn-edit">✏️ Editar</a>
+            <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn btn-back">⬅️ Volver</a>
+        </div>
+    </main>
+
+</body>
+</html>

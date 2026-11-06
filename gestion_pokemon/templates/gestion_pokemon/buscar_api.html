@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscar Pokémon | Pokédex World</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07172e;color:#fff;font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#063b79,#087ac5,#00a6d9);padding:30px 8%}
+header h1{margin:0 0 8px}header p{margin:0;color:#d7efff}
+main{max-width:850px;width:90%;margin:35px auto}
+a{color:#6bd2ff;text-decoration:none}.back{display:inline-block;margin-bottom:22px}
+.search{background:#102c4d;border:1px solid #24689c;border-radius:15px;padding:25px}
+form{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+input{flex:1;min-width:200px;padding:12px;border-radius:8px;border:1px solid #3287b9;font-size:16px}
+button{padding:12px 20px;background:#08a9e8;color:white;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.card{margin-top:25px;padding:25px;border-radius:15px;background:linear-gradient(160deg,#153b63,#0c2542);border:1px solid #22527e;display:grid;grid-template-columns: minmax(180px, 1fr) 2fr;gap:20px;align-items:center}
+.card img{width:100%;max-height:260px;object-fit:contain}.card h2{text-transform:capitalize}.card p{line-height:1.7;color:#d4eaff}
+.error{margin-top:20px;background:#642c3c;padding:15px;border-radius:8px}
+@media(max-width:600px){.card{grid-template-columns:1fr;text-align:center}}
+</style>
+</head>
+<body>
+<header><h1>🔎 Consulta con PokeAPI</h1><p>Busca Pokémon por nombre o número y consulta información desde la API.</p></header>
+<main>
+<a class="back" href="{% url 'gestion_pokemon:lista_pokemones' %}">← Volver a la Pokédex</a>
+<section class="search">
+<h2>Buscar Pokémon</h2>
+<form method="get">
+<input name="nombre" value="{{ nombre_buscado }}" placeholder="Ejemplo: pikachu o 25" required>
+<button type="submit">Buscar</button>
+</form>
+</section>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% if resultado %}
+<section class="card">
+<div><img src="{{ resultado.imagen }}" alt="{{ resultado.nombre }}"></div>
+<div>
+<h2>#{{ resultado.numero }} — {{ resultado.nombre }}</h2>
+<p><strong>Tipo:</strong> {{ resultado.tipos|join:", " }}<br>
+<strong>Peso:</strong> {{ resultado.peso }} kg<br>
+<strong>Altura:</strong> {{ resultado.altura }} m<br>
+<strong>Habilidades:</strong> {{ resultado.habilidades|join:", " }}<br>
+<strong>Experiencia base:</strong> {{ resultado.experiencia }}</p>
+</div>
+</section>
+{% endif %}
+</main>
+</body>
+</html>

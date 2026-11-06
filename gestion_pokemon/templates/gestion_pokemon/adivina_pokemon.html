@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Quién es este Pokémon?</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #07172e; color: white; margin-top: 40px; }
+        .card { background: #102c4d; padding: 30px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 1px solid #22527e; width: 350px; }
+        .silueta {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            filter: brightness(0); 
+            transition: filter 0.5s ease;
+        }
+        .revelado {
+            filter: brightness(1) !important;
+        }
+        .opciones-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-opcion { 
+            padding: 12px; 
+            font-size: 16px; 
+            background-color: #087fc1; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-transform: capitalize;
+            transition: 0.3s;
+        }
+        .btn-opcion:hover { background-color: #35c5ff; color: #07172e; }
+        
+        .btn-reintentar { 
+            padding: 12px 20px; 
+            font-size: 16px; 
+            background-color: #ffcb05; 
+            color: #3b5ca8; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 15px;
+        }
+        .btn-reintentar:hover { background-color: #e0b004; }
+
+        .btn-volver { background-color: #22527e; color: white; margin-top: 15px; display: block; text-decoration: none; padding: 10px; border-radius: 6px;}
+        .btn-volver:hover { background-color: #3287b9; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>¿Quién es este Pokémon? 🎮</h1>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% elif resultado %}
+            <div>
+                <img src="{{ resultado.imagen }}" alt="Pokémon misterioso" class="silueta {% if adivinado or mensaje %}revelado{% endif %}">
+            </div>
+
+            {% if mensaje %}
+                <p style="font-size: 18px; font-weight: bold; color: {% if adivinado %}#43c5ff{% else %}#d94b5c{% endif %}; margin-top: 15px;">
+                    {{ mensaje }}
+                </p>
+            {% endif %}
+
+            {% if not adivinado and not mensaje %}
+                <form method="POST" class="opciones-container">
+                    {% csrf_token %}
+                    <input type="hidden" name="pokemon_id" value="{{ resultado.id }}">
+                    <input type="hidden" name="nombre_correcto" value="{{ resultado.nombre }}">
+
+                    {% for opcion in opciones %}
+                        <button type="submit" name="intento" value="{{ opcion }}" class="btn-opcion">
+                            {{ opcion|capfirst }}
+                        </button>
+                    {% endfor %}
+                </form>
+            {% else %}
+                <br>
+                <a href="{% url 'gestion_pokemon:adivina_pokemon' %}"><button class="btn-reintentar">Jugar otra vez</button></a>
+            {% endif %}
+        {% endif %}
+
+        <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn-volver">Volver al Inicio</a>
+    </div>
+
+</body>
+</html>

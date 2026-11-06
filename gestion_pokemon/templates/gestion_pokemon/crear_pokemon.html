@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Nuevo Pokémon</title>
+    <link rel="stylesheet" href="{% static 'css/c_p.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="container-form">
+        <!-- Encabezado integrado dentro de la tarjeta -->
+        <div class="header-form">
+            <h2>⚡ Registrar Nuevo Pokémon ⚡</h2>
+            <p>Completa los datos para añadirlo a la Pokédex</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="pokemon-form">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-create">Guardar Pokémon</button>
+                <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn-back">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>

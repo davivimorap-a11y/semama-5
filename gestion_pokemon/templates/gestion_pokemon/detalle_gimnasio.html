@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Detalle del Gimnasio</title>
+    <link rel="stylesheet" href="{% static 'css/detalle_pokemon.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container" style="max-width: 600px; margin-top: 40px;">
+        <div class="pokemon-card" style="padding: 30px; text-align: center;">
+            <h2 style="color: #1a1a1a; margin-bottom: 15px;">🏟️ Gimnasio de {{ gimnasio.lider_del_gym }}</h2>
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 8px;">Tipo / Elemento: <strong>{{ gimnasio.naturaleza_elemento }}</strong></p>
+            <p style="font-size: 1.1rem; color: #3b4cca; margin-bottom: 20px;">Medalla Otorgada: <strong>{{ gimnasio.medallas }}</strong></p>
+            <div style="margin-top: 30px;">
+                <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn btn-back">⬅️ Volver al Inicio</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

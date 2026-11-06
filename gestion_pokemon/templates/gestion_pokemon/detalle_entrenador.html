@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Detalle del Entrenador</title>
+    <!-- Puedes usar un CSS modular o estilos directos limpios -->
+    <link rel="stylesheet" href="{% static 'css/detalle_pokemon.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="container" style="max-width: 700px; margin-top: 40px;">
+        <div class="pokemon-card" style="padding: 30px;">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-size: 2rem; color: #1a1a1a;">🧢 {{ entrenador.nombre }} {{ entrenador.apellido }} 🧢</h2>
+                <p style="color: #666; font-size: 1rem; margin-top: 5px;">ID Documento: <strong>{{ entrenador.id_documento }}</strong></p>
+            </div>
+
+            <div style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;">
+                <h3 style="color: #3b4cca; margin-bottom: 10px; font-size: 1.2rem;">✨ Pokémones en su Equipo:</h3>
+                <ul style="list-style-type: disc; margin-left: 20px; color: #444; margin-bottom: 20px;">
+                    {% for poke in entrenador.pokemones.all %}
+                        <li style="margin-bottom: 5px; font-size: 1rem;">{{ poke.nombre }} ({{ poke.naturaleza_elemento }})</li>
+                    {% empty %}
+                        <p style="color: #888; font-style: italic;">Este entrenador aún no tiene pokémones registrados en su equipo.</p>
+                    {% endfor %}
+                </ul>
+
+                <h3 style="color: #3b4cca; margin-bottom: 10px; font-size: 1.2rem;">🏆 Medallas Conquistadas:</h3>
+                <ul style="list-style-type: disc; margin-left: 20px; color: #444;">
+                    {% for medalla in entrenador.medallas.all %}
+                        <li style="margin-bottom: 5px; font-size: 1rem;">Medalla {{ medalla.medalla }} - Gimnasio de {{ medalla.ciudad }} (Líder: {{ medalla.lider }})</li>
+                    {% empty %}
+                        <p style="color: #888; font-style: italic;">Aún no ha ganado ninguna medalla de gimnasio.</p>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn btn-back">⬅️ Volver al Inicio</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

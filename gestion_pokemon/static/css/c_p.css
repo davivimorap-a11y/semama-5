@@ -1,0 +1,134 @@
+/* ==========================================
+   VISTA DE CREACIÓN / FORMULARIO CORREGIDO
+   ========================================== */
+.container-form {
+    max-width: 650px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid #ffcb05; /* Franja amarilla estilo Pokémon */
+}
+
+/* Estilo del encabezado interno */
+.header-form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header-form h2 {
+    color: #1a1a1a;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.header-form p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Forzar que cada etiqueta y su campo formen un bloque ordenado */
+.pokemon-form p {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column !important; /* Fuerza a que la etiqueta vaya arriba */
+    align-items: stretch !important;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Estilo estricto para las etiquetas generadas por Django */
+.pokemon-form label {
+    margin-bottom: 8px !important;
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    display: block !important;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+/* Inputs, Textareas y Selects con ancho absoluto del 100% */
+.pokemon-form input[type="text"],
+.pokemon-form input[type="number"],
+.pokemon-form input[type="file"],
+.pokemon-form textarea,
+.pokemon-form select {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    border: 2px solid #e1e8ed !important;
+    border-radius: 10px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.95rem !important;
+    outline: none !important;
+    background-color: #f8f9fa !important;
+    box-sizing: border-box !important;
+    transition: all 0.3s ease;
+}
+
+.pokemon-form input:focus, 
+.pokemon-form textarea:focus,
+.pokemon-form select:focus {
+    border-color: #3b4cca !important; /* Azul Pokémon */
+    background-color: #fff !important;
+    box-shadow: 0 0 0 4px rgba(59, 76, 202, 0.15) !important;
+}
+
+.pokemon-form input[type="file"] {
+    padding: 10px !important;
+    background-color: #fff !important;
+    cursor: pointer;
+}
+
+/* Contenedor de botones inferiores ordenados a la derecha */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+/* Botones de acción */
+.btn-create {
+    background-color: #28a745 !important;
+    color: white !important;
+    padding: 12px 25px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-create:hover {
+    background-color: #218838 !important;
+    transform: translateY(-2px);
+}
+
+.btn-back {
+    background-color: #e2e8f0 !important;
+    color: #4a5568 !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-back:hover {
+    background-color: #cbd5e1 !important;
+    color: #1a202c !important;
+}

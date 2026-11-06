@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - Registrar Entrenador</title>
+    <!-- Asegúrate de que la ruta sea exactamente esta -->
+    <link rel="stylesheet" href="{% static 'css/c_p.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="container-form">
+        <div class="header-form">
+            <h2>🧢 Registrar Entrenador 🧢</h2>
+            <p>Ingresa los datos del nuevo entrenador Pokémon</p>
+        </div>
+
+        <form method="POST" class="pokemon-form">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-create">Guardar Entrenador</button>
+                <a href="{% url 'gestion_pokemon:lista_pokemones' %}" class="btn btn-back">Cancelar</a>
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>
